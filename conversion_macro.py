@@ -241,6 +241,8 @@ def pull_other_entity_values(data, option):
         print('\r\nWARNING: There is no OTHER column in the data...')
         return data
     
+    data['Other Len'] = data['Other'].str.len()
+    data['Other'] = data['Other'].fillna('{}')
     data['Other Dict'] = data['Other'].apply(lambda x: ast.literal_eval(re.sub(r'(\{| )([^:,{ ]+?):', r'\1"\2":', x)))
     all_keys = [k for _, row in data.iterrows() for k, _ in row['Other Dict'].items()]
 
@@ -277,7 +279,7 @@ def reorder_columns(data):
     order.
     """
     
-    _print_line('Deleting blank columns and duplicate slot values', 7, '')
+    _print_line('Sorting the columns into their final order', 8, '')
     good_cols = ['Main Company', 'Article Date', 'Event Type', 'Event Target', 
                  'Extraction', 'Polarity', 'Other', 'Sentence', 'URL', 
                  'Sentence(Inc. Annotations)']
