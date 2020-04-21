@@ -61,8 +61,12 @@ def read_results(document):
         raise Exception('\r\nERROR: This is not a valid document. '
               'Please check your input and try again.')
     
-    file = open(document, 'r', encoding='utf-8')
-    data = [row for row in csv.reader(file, delimiter=',')]
+    try:
+        file = open(document, 'r', encoding='utf-8')
+        data = [row for row in csv.reader(file, delimiter=',')]
+    except UnicodeDecodeError:
+        file = open(document, 'r', encoding='latin-1')
+        data = [row for row in csv.reader(file, delimiter=',')]
     file.close()
     
     return data
@@ -216,7 +220,10 @@ def remove_dashes_from_sentence_start(data):
     the data) in order to avoid this
     """
     
-    data['Sentence'] = data['Sentence'].str.replace(r'^[ ]*(-)+[ ]*', '', regex=True)
+    try:
+        data['Sentence'] = data['Sentence'].str.replace(r'^[ ]*(-)+[ ]*', '', regex=True)
+    except KeyError:
+        pass
     return data
     
 
