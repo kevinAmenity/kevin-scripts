@@ -362,7 +362,7 @@ if __name__ == "__main__":
         "--pullothervalues",
         required=False,
         action="store_true",
-        help='Pull slot values from "Other" column to their respective columns (defualt FALSE).',
+        help='Pull slot values from "Other" column to their respective columns (default FALSE).',
     )
     parser.add_argument(
         "--overwrite",
