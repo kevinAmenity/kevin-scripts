@@ -401,7 +401,7 @@ if __name__ == "__main__":
         all_data
     )  # delete slot columns containing no values
     all_data = reorder_columns(all_data)  # reorders columns
-    write_document(all_data, document)  # write final document
+    write_document(all_data, final_document)  # write final document
 
     print(
         "\r\nAll done; finished in {} seconds.".format(
